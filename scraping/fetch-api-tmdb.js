@@ -69,7 +69,7 @@ exports.getFilmeApiTMDB = async (nmf) => {
             elenco: nmElenco,
             pais: nmPais,
             duracao: qtDuracao,
-            classificacao_etaria: dsClassificacaoEtaria,
+            classificacaoEtaria: dsClassificacaoEtaria,
             nomeOriginal: nmOriginal,
             dataLancamento: dtLancamento,
             genero: nmGenero,
