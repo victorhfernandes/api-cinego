@@ -9,16 +9,17 @@ var dsSinopse,
     nmPais,
     qtDuracao,
     dsClassificacaoEtaria,
+    nmFilme,
     nmOriginal,
     dtLancamento,
     nmGenero,
     movieID;
 
 
-exports.getFilmeApiTMDB = async (nmFilme) => {
+exports.getFilmeApiTMDB = async (nmf) => {
 
     try {
-        const resNm = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${nmFilme}&language=pt-BR`);
+        const resNm = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${nmf}&language=pt-BR`);
         const jsonNm = await resNm.json();
         movieID = jsonNm.results[0].id;
     } catch (e) {
@@ -31,6 +32,7 @@ exports.getFilmeApiTMDB = async (nmFilme) => {
         dsSinopse = jsonId.overview;
         imPoster = 'https://image.tmdb.org/t/p/w500' + jsonId.poster_path;
         nmOriginal = jsonId.original_title;
+        nmFilme = jsonId.title;
         dtLancamento = jsonId.release_date;
         qtDuracao = jsonId.runtime;
         let elenco = jsonId.credits.cast;
@@ -60,7 +62,7 @@ exports.getFilmeApiTMDB = async (nmFilme) => {
         }
 
         const objFilme = {
-            nomeFilme: nmFilme,
+            nome: nmFilme,
             sinopse: dsSinopse,
             poster: imPoster,
             direcao: nmDirecao,
@@ -79,5 +81,5 @@ exports.getFilmeApiTMDB = async (nmFilme) => {
     }
 }
 
-/*var nmFilme = 'A Morte do Demônio: A Ascensão';
-getFilmeApiTMDB(nmFilme);*/
+/*var nmf = 'A Morte do Demônio: A Ascensão';
+getFilmeApiTMDB(nmf);*/

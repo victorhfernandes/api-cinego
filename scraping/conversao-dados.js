@@ -1,13 +1,28 @@
 exports.horario = (hr) => {
-    hr = hr.replace('pm', '');
-    hr = hr.replace('am', '');
-    hr = hr + ':00';
+    if (hr.includes('pm')) {
+        hr = hr.replace('pm', '');
+        let splitString = hr.split(":");
+        if (splitString[0] !== '12') {
+            splitString[0] = parseInt(splitString[0]) + 12;
+            hr = `${splitString[0]}:${splitString[1]}`;
+        }
+    }
+    if (hr.includes('am')){
+        hr = hr.replace('am', '');
+        let splitString = hr.split(":");
+        if (splitString[0] === '12') {
+            splitString[0] = parseInt(splitString[0]) - 12;
+            hr = `${splitString[0]}:${splitString[1]}`;
+        }
+        hr = '0' + hr;
+    }
+
     return hr;
 }
 
 exports.linguagem = (lgm) => {
     if (lgm) {
-        splitString = lgm.split(" ", 1);
+        let splitString = lgm.split(" ", 1);
         if (splitString[0] === 'Dubbed') {
             splitString[0] = 'Dublado';
         }
@@ -46,7 +61,7 @@ exports.data = (dt, i) => {
 }
 
 exports.tecnologia = (tc) => {
-    if (tc === 'Standard'){
+    if (tc === 'Standard') {
         tc = '2D'
     }
 
