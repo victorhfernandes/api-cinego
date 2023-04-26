@@ -7,6 +7,7 @@ app.get('/', (req, res) => {
 });
 
 require('./routes/scraping.router')(app);
+require('./routes/instrucoes.router')(app);
 
 
 app.listen(process.env.PORT || 3000, () => {
