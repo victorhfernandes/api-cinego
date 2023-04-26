@@ -1,4 +1,6 @@
 exports.horario = (hr) => {
+    hr = hr.replace('pm', '');
+    hr = hr.replace('am', '');
     hr = hr + ':00';
     return hr;
 }
@@ -6,11 +8,18 @@ exports.horario = (hr) => {
 exports.linguagem = (lgm) => {
     if (lgm) {
         splitString = lgm.split(" ", 1);
+        if (splitString[0] === 'Dubbed') {
+            splitString[0] = 'Dublado';
+        }
+        if (splitString[0] === 'Subtitled') {
+            splitString[0] = 'Legendado';
+        }
         return lgm = splitString[0];
     } else {
         return "Nacional"
     }
 }
+
 
 exports.data = (dt, i) => {
     if (dt == 'Hoje') {
@@ -34,6 +43,14 @@ exports.data = (dt, i) => {
 
         return `${ano}-${mes}-${dia}`;
     };
+}
+
+exports.tecnologia = (tc) => {
+    if (tc === 'Standard'){
+        tc = '2D'
+    }
+
+    return tc;
 }
 
 exports.pais = (iso_3166_1) => {

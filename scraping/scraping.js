@@ -49,6 +49,7 @@ exports.sessoesScraping = async (nmCinema) => {
                 let lr_c_vn = $(element).find('.lr_c_vn');
                 for (const element of lr_c_vn) {
                     tecnologia = $(element).text();
+                    tecnologia = converter.tecnologia(tecnologia);
                     //console.log(tecnologia);
                     linguagem = linguagens[i];
                     linguagem = converter.linguagem(linguagem);
