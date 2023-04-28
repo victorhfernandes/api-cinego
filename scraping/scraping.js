@@ -6,7 +6,7 @@ exports.sessoesScraping = async (nmCinema) => {
     do {
         var axiosResponse = await axios.request({
             method: "GET",
-            url: "https://www.google.com.br/search?q=" + nmCinema,
+            url: "https://www.google.com/search?q=" + nmCinema,
             headers: {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36"
             }
