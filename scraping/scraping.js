@@ -1,6 +1,7 @@
 const cheerio = require("cheerio");
 const axios = require("axios");
 const converter = require('./conversao-dados');
+const { getFilmesEmBreve } = require('./em-breve')
 
 exports.sessoesScraping = async (nmCinema) => {
     do {
@@ -18,6 +19,7 @@ exports.sessoesScraping = async (nmCinema) => {
     var arrayFilmes = [],
         arraySessoes = [],
         arrayHorarios = [],
+        arrayEmBreve = [],
         sessoesCinema = [],
         linguagens = [],
         dataSessao,
@@ -104,6 +106,19 @@ exports.sessoesScraping = async (nmCinema) => {
 
         arrayFilmes = [];
     }
+    const diff = getFilmesEmBreve(sessoesCinema);
+
+    for (let filme of diff){
+        if(filme.length === 0){continue;};
+        const objNome = {
+            nome: filme.toString()
+        }
+        arrayEmBreve.push(objNome);
+    }
+    const objEmBreve = {
+        emBreve: arrayEmBreve
+    }
+    sessoesCinema.push(objEmBreve);
 
     return sessoesCinema;
 }
