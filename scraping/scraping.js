@@ -2,6 +2,7 @@ const cheerio = require("cheerio");
 const axios = require("axios");
 const converter = require("./conversao-dados");
 const { getFilmesEmBreve } = require("./em-breve");
+const { getFilmeApiTMDB } = require("./fetch-api-tmdb");
 
 exports.sessoesScraping = async (nmCinema) => {
   do {
@@ -27,6 +28,7 @@ exports.sessoesScraping = async (nmCinema) => {
     tecnologia,
     linguagem,
     nomeFilme,
+    TMDB,
     horario,
     i = 0,
     j = 0;
@@ -40,6 +42,7 @@ exports.sessoesScraping = async (nmCinema) => {
     let lr_c_fcb = $(element).find(".lr_c_fcb"); //:eq(1)
     for (const element of lr_c_fcb) {
       nomeFilme = $(element).attr("data-movie-name");
+      TMDB = getFilmeApiTMDB(nomeFilme);
       //console.log(nomeFilme);
       let YHR1ce = $(element).find(".YHR1ce");
       for (const element of YHR1ce) {
@@ -81,8 +84,15 @@ exports.sessoesScraping = async (nmCinema) => {
       }
       //console.log(arraySessoes);
 
+      TMDB = await getFilmeApiTMDB(nomeFilme);
+      if (TMDB !== "vazio") {
+        nomeFilme = TMDB.nome;
+      } else {
+        //console.log(TMDB);
+      }
       const objFilme = {
         nome: nomeFilme,
+        poster: TMDB.poster,
         sessoes: arraySessoes,
       };
 
