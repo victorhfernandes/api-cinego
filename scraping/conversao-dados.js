@@ -31,7 +31,7 @@ exports.linguagem = (lgm) => {
         }
         return lgm = splitString[0];
     } else {
-        return "Nacional"
+        return "Dublado"
     }
 }
 
@@ -40,7 +40,7 @@ exports.data = (dt, i) => {
     if (dt == 'Hoje') {
         const hoje = new Date();
 
-        return formatarData(hoje);
+        return 'Hoje';
     } else {
         const hoje = new Date();
         const diaSeguinte = new Date(hoje);
@@ -56,7 +56,7 @@ exports.data = (dt, i) => {
         if (mes < 10) { mes = '0' + mes; }
         if (dia < 10) { dia = '0' + dia; }
 
-        return `${ano}-${mes}-${dia}`;
+        return `${dia}/${mes}`;
     };
 }
 

@@ -113,7 +113,7 @@ exports.sessoesScraping = async (nmCinema) => {
 
     arrayFilmes = [];
   }
-  const diff = getFilmesEmBreve(sessoesCinema);
+  /*const diff = getFilmesEmBreve(sessoesCinema);
 
   for (let filme of diff) {
     if (filme.length === 0) {
@@ -127,7 +127,7 @@ exports.sessoesScraping = async (nmCinema) => {
   const objEmBreve = {
     emBreve: arrayEmBreve,
   };
-  sessoesCinema.push(objEmBreve);
+  sessoesCinema.push(objEmBreve);*/
 
   return sessoesCinema;
 };
