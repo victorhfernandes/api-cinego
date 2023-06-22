@@ -36,7 +36,7 @@ exports.sessoesScraping = async (nmCinema) => {
   for (const element of $(".WIDPrb")) {
     //:first
     dataSessao = $(element).attr("data-date");
-    //dataSessao = converter.data(dataSessao, j);
+    dataSessao = converter.data(dataSessao, j);
     //console.log(dataSessao);
     j++;
     let lr_c_fcb = $(element).find(".lr_c_fcb"); //:eq(1)
