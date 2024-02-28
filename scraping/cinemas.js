@@ -1,26 +1,25 @@
 exports.nomeCinemas = () => {
-    const cinemas = [
+  const cinemas = [
     "Cinemark Praiamar",
-    "Cine Flix Miramar", 
-    "Cine Roxy 5 Gonzaga", 
+    "Cine Flix Miramar",
+    "Cine Roxy 5 Gonzaga",
     "Cine Roxy 6 Brisamar",
     "Cinesystem Litoral Plaza",
-    "Cine Roxy 3 Parque Anilinas", 
+    "Cine Roxy 3 Parque Anilinas",
     "Cine 3 Ferry Boat's Plaza",
-    "Espaço Itaú de Cinema - Augusta", 
-    "Petra Belas Artes",
-];
+    "Cinemar Itanhaém",
+  ];
 
-function format (cinemas) {
+  function format(cinemas) {
     var arrayCinemas = [];
-    for (const cinema of cinemas){
-        const objCinema = { key: cinema, value: cinema}
+    for (const cinema of cinemas) {
+      const objCinema = { key: cinema, value: cinema };
 
-        arrayCinemas.push(objCinema);
+      arrayCinemas.push(objCinema);
     }
 
     return arrayCinemas;
-}
+  }
 
-return format(cinemas);
-}
+  return format(cinemas);
+};
