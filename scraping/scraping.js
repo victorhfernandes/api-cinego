@@ -1,8 +1,9 @@
 const cheerio = require("cheerio");
 const axios = require("axios");
 const converter = require("./conversao-dados");
-const { getFilmesEmBreve } = require("./em-breve");
-const { getFilmeApiTMDB } = require("./fetch-api-tmdb");
+const { reorganizeJSON } = require("./reorganize");
+//const { getFilmesEmBreve } = require("./em-breve");
+//const { getFilmeApiTMDB } = require("./fetch-api-tmdb");
 
 exports.sessoesScraping = async (nomeCinemas) => {
   let arrayCinema = [];
@@ -106,73 +107,16 @@ exports.sessoesScraping = async (nomeCinemas) => {
     arrayCinema.push(objemCartaz);
   }
 
-  //----------------------------------------
-  let nomesFilmes = [],
-    horariosFilme = [],
-    sessoesFilme = [],
-    datasFilme = [],
-    setDatasFilme,
-    setNomesFilmes;
+  arrayFilmes = [];
+  arraySessoes = [];
+  arrayHorarios = [];
+  emCartaz = [];
+  linguagens = [];
 
-  for (let cinema of arrayCinema) {
-    for (let emCartaz of cinema.emCartaz) {
-      for (filme of emCartaz.filmes) {
-        nomesFilmes.push(filme.nome);
-      }
-      datasFilme.push(emCartaz.data);
-    }
-  }
+  cinemas = reorganizeJSON(arrayCinema);
 
-  setNomesFilmes = new Set(nomesFilmes);
-  setDatasFilme = new Set(datasFilme);
+  arrayCinema = [];
 
-  let i = 0;
-
-  //console.log("00000000000000000000");
-
-  for (let nomeFilme of setNomesFilmes) {
-    //console.log(nomeFilme);
-    for (let dataFilme of setDatasFilme) {
-      //console.log(dataFilme);
-      for (let cinema of arrayCinema) {
-        for (let emCartaz of cinema.emCartaz) {
-          if (dataFilme === emCartaz.data) {
-            for (filme of emCartaz.filmes) {
-              if (nomeFilme === filme.nome) {
-                let objSessao = {
-                  cinema: cinema.cinema,
-                  sessoes: filme.sessoes,
-                };
-                console.log(i);
-                //console.log(i);
-                //console.log(emCartaz.data);
-                //console.log(cinema.cinema);
-                i++;
-                //console.log(filme.sessoes);
-                //console.log("---------------------------");
-                horariosFilme.push(objSessao);
-              }
-            }
-          }
-        }
-      }
-      let objDatas = {
-        data: dataFilme,
-        dados: horariosFilme,
-      };
-      sessoesFilme.push(objDatas);
-    }
-    let objCinema = {
-      filme: nomeFilme,
-      dados: sessoesFilme,
-    };
-
-    cinemas.push(objCinema);
-  }
-
-  //-----------------------------------------
-
-  //return arrayCinema;
   return cinemas;
 };
 
