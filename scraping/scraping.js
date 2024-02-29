@@ -36,7 +36,7 @@ exports.sessoesScraping = async (nomeCinemas) => {
       i = 0,
       j = 0;
 
-    for (const element of $(".WIDPrb")) {
+    for (const element of $(".WIDPrb:first")) {
       dataSessao = $(element).attr("data-date");
       dataSessao = converter.data(dataSessao, j);
       j++;
@@ -99,12 +99,12 @@ exports.sessoesScraping = async (nomeCinemas) => {
       arrayFilmes = [];
     }
 
-    const objemCartaz = {
+    const objEmCartaz = {
       cinema: nomeCinema,
       emCartaz: emCartaz,
     };
 
-    arrayCinema.push(objemCartaz);
+    arrayCinema.push(objEmCartaz);
   }
 
   arrayFilmes = [];

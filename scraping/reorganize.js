@@ -7,9 +7,9 @@ exports.reorganizeJSON = (arrayCinema) => {
     setDatasFilme,
     setNomesFilmes;
 
-  for (let cinema of arrayCinema) {
-    for (let emCartaz of cinema.emCartaz) {
-      for (filme of emCartaz.filmes) {
+  for (const cinema of arrayCinema) {
+    for (const emCartaz of cinema.emCartaz) {
+      for (const filme of emCartaz.filmes) {
         nomesFilmes.push(filme.nome);
       }
       datasFilme.push(emCartaz.data);
@@ -19,14 +19,14 @@ exports.reorganizeJSON = (arrayCinema) => {
   setNomesFilmes = new Set(nomesFilmes);
   setDatasFilme = new Set(datasFilme);
 
-  for (let nomeFilme of setNomesFilmes) {
-    for (let dataFilme of setDatasFilme) {
-      for (let cinema of arrayCinema) {
-        for (let emCartaz of cinema.emCartaz) {
+  for (const nomeFilme of setNomesFilmes) {
+    for (const dataFilme of setDatasFilme) {
+      for (const cinema of arrayCinema) {
+        for (const emCartaz of cinema.emCartaz) {
           if (dataFilme === emCartaz.data) {
-            for (filme of emCartaz.filmes) {
+            for (const filme of emCartaz.filmes) {
               if (nomeFilme === filme.nome) {
-                let objSessao = {
+                const objSessao = {
                   cinema: cinema.cinema,
                   sessoes: filme.sessoes,
                 };
@@ -36,19 +36,24 @@ exports.reorganizeJSON = (arrayCinema) => {
           }
         }
       }
-      let objDatas = {
+      const objDatas = {
         data: dataFilme,
         dados: horariosFilme,
       };
       sessoesFilme.push(objDatas);
     }
-    let objCinema = {
+    const objCinema = {
       filme: nomeFilme,
       dados: sessoesFilme,
     };
 
     cinemas.push(objCinema);
   }
+
+  nomesFilmes = [];
+  horariosFilme = [];
+  sessoesFilme = [];
+  datasFilme = [];
 
   return cinemas;
 };
